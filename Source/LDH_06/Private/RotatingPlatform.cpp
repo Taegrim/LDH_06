@@ -10,8 +10,18 @@ ARotatingPlatform::ARotatingPlatform()
 	
 	PrimaryActorTick.bCanEverTick = true;
 	
-	RotateSpeed = 90.f;
 	LoopTime = 3.f;
+}
+
+void ARotatingPlatform::SetRotateSpeed(float NewRotateSpeed)
+{
+	RotateSpeed = NewRotateSpeed;
+}
+
+void ARotatingPlatform::InitRandomVal()
+{
+	RotateSpeed = FMath::RandRange(0.f, 90.f);
+	LoopTime = FMath::RandRange(2.f, 4.f);
 }
 
 void ARotatingPlatform::BeginPlay()
@@ -26,7 +36,10 @@ void ARotatingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	AddActorLocalRotation(FRotator(0, RotateSpeed * DeltaTime, 0));
+	if (!FMath::IsNearlyZero(RotateSpeed))
+	{
+		AddActorLocalRotation(FRotator(0, RotateSpeed * DeltaTime, 0));	
+	}
 }
 
 void ARotatingPlatform::ToggleVisible()

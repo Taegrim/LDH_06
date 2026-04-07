@@ -11,6 +11,12 @@ class LDH_06_API AObstacle : public AActor
 	
 public:	
 	AObstacle();
+	
+	void SetStartLocation(FVector NewStartLocation);
+	void SetMoveSpeed(FVector NewMoveSpeed);
+	void SetMaxRange(float NewMaxRange);
+	
+	void InitRandomVal();
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Obstacle|Components")
@@ -24,10 +30,11 @@ protected:
 	FVector MoveSpeed;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Obstacle|Components")
 	float MaxRange;
-	FVector Velocity;
-	float Time;
 	
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
+private:
+	FVector Velocity;
+	float Time;
 };
